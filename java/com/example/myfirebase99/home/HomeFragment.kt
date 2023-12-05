@@ -45,8 +45,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             articleModel ?: return
 
             articleList.add(articleModel)
-            //articleAdapter.submitList(articleList)
-
         }
         override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {}
         override fun onChildRemoved(snapshot: DataSnapshot) {}
@@ -63,10 +61,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val fragmentHomeBinding = FragmentHomeBinding.bind(view)
         binding = fragmentHomeBinding
-
-//        fragmentHomeBinding.articleRecyclerView.layoutManager = LinearLayoutManager(context)
-//        fragmentHomeBinding.articleRecyclerView.adapter = articleAdapter
-
         articleList.clear()
 
         firestore.collection("Articles")
@@ -101,48 +95,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                         }
                     })
             }
-
-//        articleDB = Firebase.database.reference.child(DB_ARTICLES)
-//        userDB = Firebase.database.reference.child(DB_USERS)
-//        articleAdapter = ArticleAdapter(onItemClicked = { articleModel->
-//            if (auth.currentUser != null){
-//                // todo 로그인을 한 상태
-//
-//                if(auth.currentUser!!.uid != articleModel.sellerId){
-//
-//                    val chatRoom = ChatListItem(
-//                        buyerId = auth.currentUser!!.uid,
-//                        sellerId = articleModel.sellerId,
-//                        itemTitle = articleModel.title,
-//                        key = System.currentTimeMillis()
-//                    )
-//
-//                    userDB.child(auth.currentUser!!.uid)
-//                        .child(CHILD_CHAT)
-//                        .push()
-//                        .setValue(chatRoom)
-//
-//                    userDB.child(articleModel.sellerId)
-//                        .child(CHILD_CHAT)
-//                        .push()
-//                        .setValue(chatRoom)
-//
-//                    Snackbar.make(view,"채팅방이 생성되었습니다. 채팅 탭에서 확인해주세요.", Snackbar.LENGTH_LONG).show()
-//
-//                } else {
-//                    // todo 내가 올린 아이템일 때
-//                    Snackbar.make(view,"내가 올린 아이템 입니다.", Snackbar.LENGTH_LONG).show()
-//
-//                }
-//
-//            } else {
-//                // todo 로그인을 안한 상태
-//                Snackbar.make(view,"로그인 후 사용해주세요", Snackbar.LENGTH_LONG).show()
-//
-//            }
-//
-//        } )
-
         fragmentHomeBinding.addFloatingButton.setOnClickListener{
 
             if(auth.currentUser != null){
@@ -154,8 +106,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
 
-        //articleDB.addChildEventListener(listener)
-
+     
     }
 
     override fun onResume() {
@@ -163,14 +114,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
 
-        // View가( Fragment가 ) 다시 보일 때마다 View를 다시 그리는 것으로 리스트의 값을 최신으로 갱신
-        //articleAdapter.notifyDataSetChanged()
+       
     }
 
-//    override fun onDestroyView() {
-//        super.onDestroyView()
-//
-//        // Fragment의 View가 Destroy될 때마다 이벤트 리스너가 remove를 해주는 방식을 사용해야 한다.
+
 //        articleDB.removeEventListener(listener)
 //    }
 }
