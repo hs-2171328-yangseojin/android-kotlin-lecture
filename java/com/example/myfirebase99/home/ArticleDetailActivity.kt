@@ -74,17 +74,6 @@ class ArticleDetailActivity : AppCompatActivity() {
             "time" to System.currentTimeMillis()
         )
 
-//        firestore.collection("Chatting")
-//            .add(chat)
-//            .addOnSuccessListener {
-//                Toast.makeText(this, "채팅이 등록되었습니다.", Toast.LENGTH_SHORT).show()
-//                Log.d("my log", " 성공")
-//                finish()
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(this, "상품 등록 실패: 모든 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
-//                Log.d("my log", " 실패")
-//            }
 
         finish()
     }
