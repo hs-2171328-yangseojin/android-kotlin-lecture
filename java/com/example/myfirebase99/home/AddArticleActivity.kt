@@ -36,9 +36,7 @@ class AddArticleActivity : AppCompatActivity() {
     private val storage: FirebaseStorage by lazy {
         Firebase.storage
     }
-//    private val articleDB: DatabaseReference by lazy {
-//        Firebase.database.reference.child(DB_ARTICLES).child("ArticleModel")
-//    }
+
     private val firestore: FirebaseFirestore by lazy {
         FirebaseFirestore.getInstance()
     }
@@ -78,8 +76,6 @@ class AddArticleActivity : AppCompatActivity() {
                 val sellerId = auth.currentUser?.uid.orEmpty()
 
                 showProgress()
-
-                // todo 중간에 이미지가 있으면 업로드 과정을 추가
                 if (selectedUri != null) {
 
                     val PhotoUri = selectedUri ?: return@setOnClickListener
@@ -155,22 +151,6 @@ class AddArticleActivity : AppCompatActivity() {
                 .addOnFailureListener { exception ->
                     Log.w("my log", "Error getting documents: ", exception)
                 }
-
-//            val query = articleDB.orderByChild("sellerId_title").equalTo("$sellerId_$title")
-//
-//            query.addListenerForSingleValueEvent(object : ValueEventListener {
-//                override fun onDataChange(snapshot: DataSnapshot) {
-//                    for (articleSnapshot in snapshot.children) {
-//                        val articleKey = articleSnapshot.key // 기사의 고유 식별자
-//                        // 기사를 찾았으므로 이제 업데이트를 수행할 수 있습니다.
-//                        updateArticle(articleKey, sellerId, title, price, imageUrl)
-//                    }
-//                }
-//
-//                override fun onCancelled(error: DatabaseError) {
-//                    // 쿼리 실행 중 오류가 발생한 경우 처리
-//                }
-//            })
         }
 
     }
@@ -202,16 +182,7 @@ class AddArticleActivity : AppCompatActivity() {
     // 아이템을 업로드하는 부분 중 일부
     private fun uploadArticle(sellerId: String, title: String, price: String, imageUrl: String) {
         val swit1Checked = findViewById<Switch>(R.id.switch1).isChecked
-
-        //val model = ArticleModel(sellerId, title, System.currentTimeMillis(), "$price 원", imageUrl, swit1Checked)
-        //articleDB.push().setValue(model)
-//        val itemMap = hashMapOf(
-//            "title" to title,
-//            "detail" to detail,
-//            "price" to "$price 원",
-//            "sale" to true
-//        )
-
+        
         val article = hashMapOf(
             "sellerId" to sellerId,
             "title" to title,
@@ -232,17 +203,6 @@ class AddArticleActivity : AppCompatActivity() {
                 Toast.makeText(this, "상품 등록 실패: 모든 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
                 Log.d("my log", " 실패")
             }
-
-
-//        articleDB.add(model)
-//            .addOnSuccessListener {
-//                Toast.makeText(this,"상품이 등록되었습니다.", Toast.LENGTH_SHORT).show()
-//                finish()
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(this,"상품 등록 실패: 모든 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
-//            }
-
         hideProgress()
 
         finish()
@@ -261,19 +221,9 @@ class AddArticleActivity : AppCompatActivity() {
         )
 
         firestore.collection("Articles")
-            //.document(id)
+           
             .whereEqualTo("timestamp", id)
             .get()
-            //.set(article)
-//            .addOnSuccessListener {
-//                Toast.makeText(this, "상품이 수정되었습니다.", Toast.LENGTH_SHORT).show()
-//                Log.d("my log", " 성공")
-//                finish()
-//            }
-//            .addOnFailureListener {
-//                Toast.makeText(this, "상품 등록 실패: 모든 내용을 입력해주세요.", Toast.LENGTH_SHORT).show()
-//                Log.d("my log", " 실패")
-//            }
             .addOnSuccessListener { querySnapshot ->
                 if (querySnapshot.documents.isNotEmpty()) {
                     val documentSnapshot = querySnapshot.documents[0]
