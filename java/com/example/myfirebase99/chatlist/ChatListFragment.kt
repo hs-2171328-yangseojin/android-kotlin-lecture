@@ -39,7 +39,7 @@ class ChatListFragment:Fragment(R.layout.fragment_chatlist) {
         binding = fragmentChatlistBinding
 
         chatListAdapter = ChatListAdapter(onItemClicked = { ChatRoom ->
-            // todo 채팅방으로 이동하는 코드
+            
 
             val intent = Intent(requireContext(), ChatRoomActivity::class.java)
             intent.putExtra("chatKey", ChatRoom.time)
@@ -60,11 +60,7 @@ class ChatListFragment:Fragment(R.layout.fragment_chatlist) {
 
         chatDB.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                // todo 서버에서 데이터를 가져오는 것에 성공하면 호출
 
-
-                // snapshot.children에 Data model들을 담은 하나의 리스트가 내려옴
-                // 이 리스트에서 Data model들을 하나씩 분리하는 작업이 필요 ( forEach )
                 snapshot.children.forEach{
                     val model = it.getValue(ChatListItem::class.java)
                     model ?: return
@@ -77,7 +73,7 @@ class ChatListFragment:Fragment(R.layout.fragment_chatlist) {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                // TODO 서버에서 데이터를 가져오는 것에 실패했을 경우 호출
+               
             }
         })
 
