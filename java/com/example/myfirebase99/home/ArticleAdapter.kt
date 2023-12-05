@@ -17,32 +17,11 @@ import java.util.*
 
 class ArticleAdapter(private var items: List<ArticleModel>, val onItemClicked: (ArticleModel) -> Unit)
     : RecyclerView.Adapter<ArticleAdapter.ViewHolder>() {
-//(val onItemClicked: (ArticleModel) -> Unit) : ListAdapter<ArticleModel, ArticleAdapter.ViewHolder>(diffUtil) {
+
     private var seller: String ?= null
 
-    // ViewBinding을 통해 레이아웃에서 가져옴
+   
     inner class ViewHolder(private val binding: ItemArticleBinding) : RecyclerView.ViewHolder(binding.root) {
-//        init {
-//            binding.root.setOnClickListener {
-//                val userid = Firebase.auth.currentUser!!.uid
-//                val clickedItem = items[adapterPosition]
-//                val itemId = clickedItem.sellerId
-//
-//                Log.d("my log1", ""+userid)
-//                Log.d("my log2", ""+clickedItem)
-//                Log.d("my log2", ""+itemId)
-//
-//                val intent = Intent(binding.root.context, AddArticleActivity::class.java)
-//                intent.putExtra("itemId", itemId)
-//                intent.putExtra("new", 0)
-//
-//                if (userid == itemId) {
-//                    binding.root.context.startActivity(intent)
-//                } else {
-//
-//                }
-//            }
-//        }
 
         fun bind(articleModel: ArticleModel) {
             val format = SimpleDateFormat("MM월 dd일")
@@ -89,20 +68,5 @@ class ArticleAdapter(private var items: List<ArticleModel>, val onItemClicked: (
         items = newItems
         notifyDataSetChanged()
     }
-
-//    companion object {
-//        val diffUtil = object : DiffUtil.ItemCallback<ArticleModel>() {
-//
-//            // 현재 노출되고 있는 아이템과 새로운 아이템이 같은지 확인 ㅡ, 새로운 아이템이 들어오면 호출됨
-//            // 일반적으로 키값을 통해 구분하게 됨
-//            override fun areItemsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
-//                return oldItem.createdAt == newItem.createdAt
-//            }
-//
-//            // 현재 아이템과 새로운 아이탬의 = 여부를 확인
-//            override fun areContentsTheSame(oldItem: ArticleModel, newItem: ArticleModel): Boolean {
-//                return oldItem == newItem
-//            }
-//        }
-//    }
-}
+ }
+    
